@@ -13,34 +13,32 @@ import ProjectShowcase from "@/components/ProjectShowcase/ProjectShowcase";
 import Contact from "@/components/Contact/Contact";
 import Footer from "@/components/Footer/Footer";
 import SplashCursor from "@/components/Animations/SplashCursor/SplashCursor";
-import Lanyard from "@/components/Components/Lanyard/Lanyard";
 import LightRays from "@/components/Backgrounds/LightRays/LightRays";
 import ScrollToRead from "@/components/ScrollToRead/ScrollToRead";
 import SpotlightCard from "@/components/Components/SpotlightCard/SpotlightCard";
 import { motion } from "framer-motion";
 import Orb from "@/components/Backgrounds/Orb/Orb";
+import ProfileCard from "@/components/Components/ProfileCard/ProfileCard";
 
 export default function Home() {
   return (
     <>
-    <BackToTop />
+      <BackToTop />
       <div className="relative bg-[#040209] bg-opacity-100 w-full h-full min-h-screen overflow-hidden text-white">
-        {/* Global Backgrounds */}
+        {/* Cursor & Utilities */}
+        <SplashCursor />
+        <FloatingElements />
+{/* Global Backgrounds */}
         <div className="z-1 absolute inset-0">
           {/* Squares làm nền chung */}
           <Squares
-            speed={0.4}
-            squareSize={50}
+            speed={0.6}
+            squareSize={100}
             direction="diagonal"
-            borderColor="rgba(255, 255, 255, 0.2)"
+            borderColor="rgba(255, 255, 255, 0.1)"
             hoverFillColor="#222"
           />
         </div>
-
-        {/* Cursor & Utilities */}
-        <SplashCursor />
-        {/* <FloatingElements /> */}
-
         {/* Navigation */}
         <Navbar />
 
@@ -50,7 +48,6 @@ export default function Home() {
           <div className="relative flex items-center w-screen h-screen">
             <div className="flex-1 px-6 w-full">
               <div className="-z-10 absolute inset-0">
-                ={" "}
                 <Squares
                   speed={0.4}
                   squareSize={50}
@@ -77,8 +74,25 @@ export default function Home() {
               <Hero />
               <ScrollToRead />
             </div>
-            <div className="hidden z-1000 md:flex flex-1 self-start h-screen">
-              <Lanyard />
+            <div className="hidden z-1000 md:flex flex-1 justify-center items-center self-center h-screen">
+              {/* Profile Card */}
+              <ProfileCard
+                name="Duong Van Manh"
+                title="Frontend Developer (Fullstack-capable)"
+                handle="manhduong2953"
+                status="Online"
+                contactText="Contact Me"
+                avatarUrl="/textures/my-profile.png"
+                showUserInfo={true}
+                enableTilt={true}
+                enableMobileTilt={false}
+                onContactClick={() =>
+                  window.open(
+                    "https://www.facebook.com/manhduong2953/",
+                    "_blank"
+                  )
+                }
+              />
             </div>
           </div>
 
