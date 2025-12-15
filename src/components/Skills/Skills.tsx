@@ -135,10 +135,9 @@ export default function Skills() {
               </div>
             </div>
 
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-slate-400">Proficiency</span>
-                <span className="text-white">{skill.level}%</span>
               </div>
               <div className="bg-white/10 rounded-full w-full h-2">
                 <motion.div
@@ -148,7 +147,7 @@ export default function Skills() {
                   className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-full h-2"
                 />
               </div>
-            </div>
+            </div> */}
           </motion.div>
         ))}
       </motion.div>
