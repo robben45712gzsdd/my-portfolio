@@ -1,153 +1,110 @@
 "use client";
+
 import { useState } from "react";
 import { motion } from "motion/react";
+import { skillItems } from "@/lib/portfolio-content";
+import { useLanguage } from "@/lib/language-context";
 
-interface Skill {
-  name: string;
-  level: number;
-  category: string;
-  icon: string;
-}
-
-const skills: Skill[] = [
-  // Frontend
-  { name: "React", level: 80, category: "Frontend", icon: "⚛️" },
-  { name: "Next.js", level: 40, category: "Frontend", icon: "▲" },
-  { name: "Vue.js", level: 90, category: "Frontend", icon: "🌐" },
-  { name: "Nuxt.js", level: 85, category: "Frontend", icon: "🔷" },
-  { name: "Dart/Flutter", level: 70, category: "Frontend", icon: "🦄" },
-  { name: "Dart", level: 60, category: "Frontend", icon: "🔸" },
-  { name: "TypeScript", level: 80, category: "Language", icon: "📘" },
-  { name: "Tailwind CSS", level: 100, category: "Frontend", icon: "🎨" },
-
-  //Library Frontend (ant design, react bits, aos, gsap, framer motion)
-  { name: "Ant Design", level: 100, category: "Library", icon: "🔷" },
-  { name: "React Bits", level: 100, category: "Library", icon: "🌱" },
-  { name: "AOS", level: 100, category: "Library", icon: "📦" },
-  { name: "GSAP", level: 65, category: "Library", icon: "🎞️" },
-  { name: "Framer Motion", level: 80, category: "Library", icon: "🌀" },
-
-  // Backend
-  { name: "Express/Node.js", level: 85, category: "Backend", icon: "🟢" },
-  { name: "PHP", level: 80, category: "Backend", icon: "🐘" },
-
-  // Databases & Infra
-  { name: "Redis", level: 83, category: "Database", icon: "🔴" },
-  { name: "MySQL", level: 95, category: "Database", icon: "🐬" },
-
-  // DevOps & Cloud
-  { name: "Docker", level: 50, category: "DevOps", icon: "🐳" },
-  { name: "Vercel", level: 80, category: "DevOps", icon: "🌐" },
-  { name: "Render", level: 70, category: "DevOps", icon: "🖥️" },
-  { name: "VPS Server", level: 70, category: "DevOps", icon: "🗄️" },
-  { name: "Cloudinary", level: 90, category: "Cloud", icon: "☁️" },
-
-  // Tools (vscode, postman, git, figma, android studio,remote destop connection)
-  { name: "VSCode", level: 90, category: "Tools", icon: "💻" },
-  { name: "Postman", level: 85, category: "Tools", icon: "📦" },
-  { name: "Git", level: 95, category: "Tools", icon: "🔧" },
-  { name: "Figma", level: 80, category: "Tools", icon: "🎨" },
-  { name: "Android Studio", level: 70, category: "Tools", icon: "📱" },
-];
-
-const categories = [
-  "All",
-  "Frontend",
-  "Backend",
-  "Library",
-  "Database",
-  "DevOps",
-  "Cloud",
-  "Tools",
-];
+const iconMap: Record<string, string> = {
+  "Vue.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg",
+  "Nuxt.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nuxtjs/nuxtjs-original.svg",
+  "React.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+  JavaScript: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+  TypeScript: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+  HTML5: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+  "CSS3/SCSS": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg",
+  "Tailwind CSS": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+  "Node.js / Express.js": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+  PHP: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
+  "Dart / Flutter": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg",
+  "SQL Server": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg",
+  MySQL: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+  Redis: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg",
+  Vuetify: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuetify/vuetify-original.svg",
+  Firebase: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
+  Docker: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+  Linux: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
+  Git: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+  Jira: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg",
+};
 
 export default function Skills() {
+  const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("All");
 
+  const categoryMap = t.skills.categories;
+  const activeRawCategory =
+    activeCategory === categoryMap[0] ? "All" : activeCategory;
+
   const filteredSkills =
-    activeCategory === "All"
-      ? skills
-      : skills.filter((skill) => skill.category === activeCategory);
+    activeRawCategory === "All"
+      ? skillItems
+      : skillItems.filter((skill) => skill.category === activeRawCategory);
 
   return (
-    <section id="skills" className="mx-auto py-20 w-full max-w-6xl">
-      <div className="mb-16 text-center">
+    <section id="skills" className="mx-auto w-full max-w-6xl py-20">
+      <div className="mb-12 text-center">
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-4 font-bold text-3xl md:text-4xl"
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.4 }}
+          className="mb-4 text-3xl font-bold md:text-4xl"
         >
-          Skills & Expertise
+          {t.skills.title}
         </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mx-auto max-w-2xl text-slate-400"
-        >
-          Technologies and tools I work with to bring ideas to life
-        </motion.p>
+        <p className="mx-auto max-w-2xl text-slate-400">{t.skills.subtitle}</p>
       </div>
 
-      {/* Category Filter */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12 px-4"
-      >
-        {categories.map((category) => (
+      <div className="mb-10 flex flex-wrap justify-center gap-2 px-4">
+        {categoryMap.map((category) => (
           <button
             key={category}
             onClick={() => setActiveCategory(category)}
-            className={`px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+            className={`rounded-full px-3 py-2 text-xs font-medium transition-colors sm:px-4 sm:text-sm ${
               activeCategory === category
-                ? "bg-white/10 text-white border border-white/20"
-                : "text-slate-400 hover:text-white hover:bg-white/5"
+                ? "border border-white/20 bg-white/10 text-white"
+                : "border border-transparent text-slate-400 hover:bg-white/5 hover:text-white"
             }`}
+            type="button"
           >
             {category}
           </button>
         ))}
-      </motion.div>
+      </div>
 
-      {/* Skills Grid */}
       <motion.div
         layout
-        className="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+        className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4"
       >
-        {filteredSkills.map((skill, index) => (
+        {filteredSkills.map((skill) => (
           <motion.div
-            key={skill.name}
+            key={`${skill.category}-${skill.name}`}
             layout
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            whileHover={{ y: -5 }}
-            className="bg-white/5 hover:bg-white/8 backdrop-blur-sm p-6 border border-white/10 rounded-xl transition-all duration-300"
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.25 }}
+            className="flex min-h-24 items-center gap-4 rounded-xl border border-white/10 bg-white/[0.04] p-4 transition-colors hover:bg-white/[0.07]"
           >
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-2xl">{skill.icon}</span>
-              <div>
-                <h3 className="font-semibold text-white">{skill.name}</h3>
-                <p className="text-slate-400 text-sm">{skill.category}</p>
-              </div>
-            </div>
-
-            {/* <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">Proficiency</span>
-              </div>
-              <div className="bg-white/10 rounded-full w-full h-2">
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${skill.level}%` }}
-                  transition={{ duration: 1, delay: 0.5 }}
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-full h-2"
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white">
+              {iconMap[skill.name] ? (
+                <img
+                  src={iconMap[skill.name]}
+                  alt={`${skill.name} logo`}
+                  loading="lazy"
+                  className="h-8 w-8 object-contain"
                 />
-              </div>
-            </div> */}
+              ) : (
+                <span className="text-sm font-bold text-slate-900">
+                  {skill.name.slice(0, 2)}
+                </span>
+              )}
+            </div>
+            <div>
+              <h3 className="font-semibold text-white">{skill.name}</h3>
+              <p className="mt-1 text-sm text-slate-400">{skill.category}</p>
+            </div>
           </motion.div>
         ))}
       </motion.div>

@@ -1,6 +1,5 @@
 "use client";
-import Squares from "@/components/Backgrounds/Squares/Squares";
-import FloatingElements from "@/components/FloatingElements/FloatingElements";
+
 import BackToTop from "@/components/BackToTop/BackToTop";
 import Navbar from "@/components/Navbar/Navbar";
 import Hero from "@/components/Hero/Hero";
@@ -12,136 +11,101 @@ import Timeline from "@/components/Timeline/Timeline";
 import ProjectShowcase from "@/components/ProjectShowcase/ProjectShowcase";
 import Contact from "@/components/Contact/Contact";
 import Footer from "@/components/Footer/Footer";
-import SplashCursor from "@/components/Animations/SplashCursor/SplashCursor";
-import LightRays from "@/components/Backgrounds/LightRays/LightRays";
 import ScrollToRead from "@/components/ScrollToRead/ScrollToRead";
-import SpotlightCard from "@/components/Components/SpotlightCard/SpotlightCard";
-import { motion } from "framer-motion";
-import Orb from "@/components/Backgrounds/Orb/Orb";
+import Squares from "@/components/Backgrounds/Squares/Squares";
+import LightRays from "@/components/Backgrounds/LightRays/LightRays";
+import SmoothSplashCursor from "@/components/Animations/SplashCursor/SmoothSplashCursor";
 import ProfileCard from "@/components/Components/ProfileCard/ProfileCard";
+import { motion } from "motion/react";
+import { profile } from "@/lib/portfolio-content";
+import { useLanguage } from "@/lib/language-context";
 
 export default function Home() {
+  const { t } = useLanguage();
+
   return (
     <>
       <BackToTop />
-      <div className="relative bg-[#040209] bg-opacity-100 w-full h-full min-h-screen overflow-hidden text-white">
-        {/* Cursor & Utilities */}
-        <SplashCursor />
-        <FloatingElements />
-{/* Global Backgrounds */}
-        <div className="z-1 absolute inset-0">
-          {/* Squares làm nền chung */}
+      <div className="relative min-h-screen w-full overflow-hidden bg-[#05070b] text-white">
+        <SmoothSplashCursor />
+        <div className="pointer-events-none fixed inset-0 opacity-40">
           <Squares
-            speed={0.6}
-            squareSize={100}
+            speed={0.18}
+            squareSize={96}
             direction="diagonal"
-            borderColor="rgba(255, 255, 255, 0.1)"
-            hoverFillColor="#222"
+            borderColor="rgba(255, 255, 255, 0.07)"
+            hoverFillColor="transparent"
           />
         </div>
-        {/* Navigation */}
+
+        <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.12),transparent_32rem),linear-gradient(180deg,transparent,rgba(0,0,0,0.55))]" />
+
         <Navbar />
 
-        {/* Main Content */}
-        <main className="z-10 relative flex flex-col justify-start items-center space-y-[60px] min-h-screen">
-          {/* Hero Section */}
-          <div className="relative flex items-center w-screen h-screen">
-            <div className="flex-1 px-6 w-full">
-              <div className="-z-10 absolute inset-0">
-                <Squares
-                  speed={0.4}
-                  squareSize={50}
-                  direction="diagonal"
-                  borderColor="rgba(255, 255, 255, 0.2)"
-                  hoverFillColor="#222"
-                />
-              </div>
-              {/* Light Rays */}
-              <div className="-z-1 absolute inset-0">
-                <LightRays
-                  raysOrigin="top-center"
-                  raysColor="#00ffff"
-                  raysSpeed={1.7}
-                  lightSpread={5}
-                  rayLength={3}
-                  followMouse={true}
-                  mouseInfluence={0.5}
-                  noiseAmount={0.1}
-                  distortion={0.05}
-                  className="custom-rays"
-                />
-              </div>
+        <main className="relative z-10 flex min-h-screen flex-col items-center justify-start space-y-12 px-4 sm:px-6">
+          <div className="relative flex min-h-screen w-full max-w-6xl items-center overflow-hidden">
+            <div className="pointer-events-none absolute inset-x-[-24vw] inset-y-0 -z-10 opacity-55">
+              <Squares
+                speed={0.12}
+                squareSize={56}
+                direction="diagonal"
+                borderColor="rgba(125, 211, 252, 0.12)"
+                hoverFillColor="transparent"
+              />
+            </div>
+            <div className="pointer-events-none absolute inset-x-[-18vw] top-0 -z-10 hidden h-[62vh] opacity-45 lg:block">
+              <LightRays
+                raysOrigin="top-center"
+                raysColor="#67e8f9"
+                raysSpeed={0.35}
+                lightSpread={3}
+                rayLength={1.8}
+                followMouse={false}
+                mouseInfluence={0}
+                noiseAmount={0.02}
+                distortion={0.01}
+              />
+            </div>
+            <div className="w-full flex-1">
               <Hero />
               <ScrollToRead />
             </div>
-            <div className="hidden z-1000 md:flex flex-1 justify-center items-center self-center h-screen">
-              {/* Profile Card */}
+            <div className="z-10 hidden flex-1 items-center justify-center md:flex">
               <ProfileCard
-                name="Duong Van Manh"
-                title="Frontend Developer (Fullstack-capable)"
-                handle="manhduong2953"
+                name={profile.name}
+                title={profile.role}
+                handle={profile.handle}
                 status="Online"
-                contactText="Contact Me"
+                contactText={t.common.contactMe}
                 avatarUrl="/textures/my-profile.png"
-                showUserInfo={true}
-                enableTilt={true}
+                showUserInfo
+                enableTilt={false}
                 enableMobileTilt={false}
-                onContactClick={() =>
-                  window.open(
-                    "https://www.facebook.com/manhduong2953/",
-                    "_blank"
-                  )
-                }
+                onContactClick={() => window.open(`mailto:${profile.email}`, "_blank")}
               />
             </div>
           </div>
 
-          {/* About Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.4 }}
+            className="w-full rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur-sm sm:p-8"
           >
-            <SpotlightCard
-              className="custom-spotlight-card"
-              spotlightColor="rgba(0, 229, 255, 0.2)"
-            >
-              <About />
-            </SpotlightCard>
+            <About />
           </motion.div>
 
-          {/* Services Section */}
           <Services />
-
-          {/* Skills Section */}
           <Skills />
-
-          {/* Process Section */}
           <Process />
-
-          {/* Timeline Section với Orb riêng */}
-          <div className="relative w-full min-h-screen overflow-hidden">
-            <div className="-z-10 absolute inset-0">
-              <Orb
-                hoverIntensity={0.1}
-                rotateOnHover={false}
-                hue={0}
-                forceHoverState={false}
-              />
-            </div>
-            <Timeline />
-          </div>
-
-          {/* Enhanced Project Showcase */}
+          <Timeline />
           <ProjectShowcase />
 
-          {/* Contact Section */}
-          <div className="mx-auto py-20 w-full h-screen">
+          <div className="mx-auto min-h-screen w-full py-12">
             <Contact />
           </div>
         </main>
-
-        {/* Footer */}
       </div>
       <Footer />
     </>

@@ -1,26 +1,30 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LanguageProvider } from "@/lib/language-context";
 
 export const metadata: Metadata = {
-  title: "Duong Van Manh - Full Stack Developer | Web, Mobile & Game Development",
-  description: "Full-stack developer specializing in React, Next.js, mobile apps, game development, and AI/ML solutions. Building modern, scalable applications with cutting-edge technologies.",
-  keywords: "full stack developer, react developer, next.js, mobile development, game development, AI ML, web development, typescript, python",
+  title: "Duong Van Manh - Front-End Developer",
+  description:
+    "Front-End Developer with 2 years of experience in Vue, Nuxt, React, TypeScript, API integration, performance optimization, and Agile/Scrum workflows.",
+  keywords:
+    "front-end developer, vue developer, nuxt developer, react developer, typescript, tailwind css, performance optimization",
   authors: [{ name: "Duong Van Manh" }],
   creator: "Duong Van Manh",
   openGraph: {
     type: "website",
     locale: "en_US",
-    // url: "https://your-domain.com",
-    title: "Duong Van Manh - Full Stack Developer",
-    description: "Full-stack developer specializing in modern web and mobile applications",
+    title: "Duong Van Manh - Front-End Developer",
+    description:
+      "Front-End Developer specializing in modern web applications, performance optimization, and product team workflows.",
     siteName: "Duong Van Manh Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Duong Van Manh - Full Stack Developer",
-    description: "Full-stack developer specializing in modern web and mobile applications",
-    creator: "@Duong Van Manhpre27838795",
+    title: "Duong Van Manh - Front-End Developer",
+    description:
+      "Front-End Developer specializing in Vue/Nuxt, React, TypeScript, and performance-focused web applications.",
+    creator: "@DuongVanManh",
   },
 };
 
@@ -30,17 +34,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-      >
+    <html lang="vi" suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
-
-          {children}
+          <LanguageProvider>{children}</LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

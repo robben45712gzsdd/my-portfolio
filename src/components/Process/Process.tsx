@@ -1,95 +1,46 @@
 "use client";
+
 import { motion } from "motion/react";
-
-interface ProcessStep {
-  number: string;
-  title: string;
-  description: string;
-  icon: string;
-}
-
-const processSteps: ProcessStep[] = [
-  {
-    number: "01",
-    title: "Discovery & Planning",
-    description: "Understanding your needs, goals, and target audience to create a strategic roadmap.",
-    icon: "🔍"
-  },
-  {
-    number: "02", 
-    title: "Design & Prototype",
-    description: "Creating wireframes, mockups, and interactive prototypes to visualize the solution.",
-    icon: "🎨"
-  },
-  {
-    number: "03",
-    title: "Development",
-    description: "Building robust, scalable solutions using modern technologies and best practices.",
-    icon: "⚙️"
-  },
-  {
-    number: "04",
-    title: "Testing & Launch",
-    description: "Thorough testing, optimization, and deployment to ensure a smooth launch.",
-    icon: "🚀"
-  }
-];
+import { useLanguage } from "@/lib/language-context";
 
 export default function Process() {
+  const { t } = useLanguage();
+
   return (
-    <section id="process" className="py-20 max-w-6xl mx-auto w-full">
-      <div className="text-center mb-16">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
+    <section id="process" className="mx-auto w-full max-w-6xl py-20">
+      <div className="mb-12 text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-bold mb-4"
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.4 }}
+          className="mb-4 text-3xl font-bold md:text-4xl"
         >
-          My Process
+          {t.process.title}
         </motion.h2>
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-slate-400 max-w-2xl mx-auto"
-        >
-          A structured approach to delivering exceptional results
-        </motion.p>
+        <p className="mx-auto max-w-2xl text-slate-400">{t.process.subtitle}</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {processSteps.map((step, index) => (
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {t.process.steps.map((step, index) => (
           <motion.div
             key={step.number}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            whileHover={{ y: -10 }}
-            className="relative group"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.4, delay: index * 0.05 }}
+            className="relative rounded-2xl border border-white/10 bg-white/[0.04] p-6"
           >
-            {/* Connection Line */}
-            {index < processSteps.length - 1 && (
-              <div className="hidden lg:block absolute top-12 left-full w-full h-0.5 bg-gradient-to-r from-white/20 to-transparent z-0" />
+            {index < t.process.steps.length - 1 && (
+              <div className="absolute left-full top-10 z-0 hidden h-px w-full bg-gradient-to-r from-cyan-300/30 to-transparent lg:block" />
             )}
-            
-            <div className="relative z-10 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/8 transition-all duration-300">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="text-3xl group-hover:scale-110 transition-transform duration-300">
-                  {step.icon}
-                </div>
-                <span className="text-2xl font-bold text-white/30 group-hover:text-white/50 transition-colors duration-300">
-                  {step.number}
-                </span>
-              </div>
-              
-              <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors duration-300">
-                {step.title}
-              </h3>
-              
-              <p className="text-slate-400 leading-relaxed">
-                {step.description}
-              </p>
-            </div>
+            <span className="mb-5 block text-3xl font-bold text-white/25">
+              {step.number}
+            </span>
+            <h3 className="mb-3 text-xl font-semibold text-white">
+              {step.title}
+            </h3>
+            <p className="leading-relaxed text-slate-400">{step.description}</p>
           </motion.div>
         ))}
       </div>

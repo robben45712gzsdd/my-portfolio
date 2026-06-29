@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import { motion } from "motion/react";
-import BlurText from "@/components/BlurText/BlurText";
 import emailjs from "emailjs-com";
+import { useLanguage } from "@/lib/language-context";
 
 interface FormData {
   firstname: string;
@@ -19,6 +19,7 @@ interface FormErrors {
 }
 
 export default function Contact() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState<FormData>({
     firstname: "",
     lastname: "",
@@ -33,13 +34,13 @@ export default function Contact() {
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
     if (!formData.firstname.trim())
-      newErrors.firstname = "First name is required";
+      newErrors.firstname = t.contact.errors.firstName;
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = t.contact.errors.emailRequired;
     } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
+      newErrors.email = t.contact.errors.emailInvalid;
     }
-    if (!formData.message.trim()) newErrors.message = "Message is required";
+    if (!formData.message.trim()) newErrors.message = t.contact.errors.message;
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -94,12 +95,7 @@ export default function Contact() {
           className="mb-4 font-bold text-3xl md:text-4xl"
         >
           <div className="flex justify-center items-center">
-            <BlurText
-              text="Get In Touch"
-              animateBy="words"
-              delay={50}
-              direction="top"
-            />
+            {t.contact.title}
           </div>
         </motion.h2>
         <motion.p
@@ -108,8 +104,7 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mx-auto max-w-2xl text-slate-400"
         >
-          Have a project in mind or want to collaborate? I&apos;d love to hear
-          from you.
+          {t.contact.subtitle}
         </motion.p>
       </div>
 
@@ -125,22 +120,21 @@ export default function Contact() {
         >
           <div>
             <h3 className="mb-2 font-semibold text-white text-2xl">
-              Let&apos;s work together
+              {t.contact.formTitle}
             </h3>
             <p className="mb-6 text-slate-400">
-              Fill in the form below to start a conversation
+              {t.contact.formSubtitle}
             </p>
           </div>
 
           {submitStatus === "success" && (
             <div className="bg-green-500/20 p-4 border border-green-500/30 rounded-lg text-green-300">
-              Your message has been sent successfully! I&apos;ll get back to you
-              soon.
+              {t.contact.success}
             </div>
           )}
           {submitStatus === "error" && (
             <div className="bg-red-500/20 p-4 border border-red-500/30 rounded-lg text-red-300">
-              There was an error sending your message. Please try again.
+              {t.contact.error}
             </div>
           )}
 
@@ -151,7 +145,7 @@ export default function Contact() {
                 name="firstname"
                 value={formData.firstname}
                 onChange={handleChange}
-                placeholder="First name *"
+                placeholder={t.contact.firstName}
                 className={`w-full px-4 py-3 bg-white/5 border rounded-lg text-white placeholder-slate-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all duration-300 outline-none ${
                   errors.firstname ? "border-red-500" : "border-white/20"
                 }`}
@@ -167,7 +161,7 @@ export default function Contact() {
                 name="lastname"
                 value={formData.lastname}
                 onChange={handleChange}
-                placeholder="Last name"
+                placeholder={t.contact.lastName}
                 className="bg-white/5 px-4 py-3 border border-white/20 focus:border-blue-400 rounded-lg outline-none focus:ring-2 focus:ring-blue-400/20 w-full text-white transition-all duration-300 placeholder-slate-400"
               />
             </div>
@@ -178,7 +172,7 @@ export default function Contact() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Email address *"
+                placeholder={t.contact.email}
                 className={`w-full px-4 py-3 bg-white/5 border rounded-lg text-white placeholder-slate-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all duration-300 outline-none ${
                   errors.email ? "border-red-500" : "border-white/20"
                 }`}
@@ -194,7 +188,7 @@ export default function Contact() {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                placeholder="Phone number (optional)"
+                placeholder={t.contact.phone}
                 className="bg-white/5 px-4 py-3 border border-white/20 focus:border-blue-400 rounded-lg outline-none focus:ring-2 focus:ring-blue-400/20 w-full text-white transition-all duration-300 placeholder-slate-400"
               />
             </div>
@@ -208,7 +202,7 @@ export default function Contact() {
               className={`w-full px-4 py-3 bg-white/5 border rounded-lg text-white placeholder-slate-400 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 transition-all duration-300 outline-none h-32 resize-none ${
                 errors.message ? "border-red-500" : "border-white/20"
               }`}
-              placeholder="Tell me about your project or inquiry *"
+              placeholder={t.contact.message}
             />
             {errors.message && (
               <p className="mt-1 text-red-400 text-sm">{errors.message}</p>
@@ -244,14 +238,14 @@ export default function Contact() {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     ></path>
                   </svg>
-                  Sending...
+                  {t.contact.sending}
                 </div>
               ) : (
-                "Send Message"
+                t.contact.send
               )}
             </motion.button>
             {isSubmitting && (
-              <p className="text-slate-400 text-sm">Please wait...</p>
+              <p className="text-slate-400 text-sm">{t.contact.wait}</p>
             )}
           </div>
         </form>

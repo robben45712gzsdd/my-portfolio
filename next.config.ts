@@ -1,11 +1,10 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   experimental: {
-    optimizeCss: false, // disable lightningcss
-    appDir: true, // cho phép dùng src/app
+    optimizeCss: false,
   },
   typescript: {
-    // ⚡ Bỏ chặn lỗi type làm fail build
     ignoreBuildErrors: true,
   },
   eslint: {

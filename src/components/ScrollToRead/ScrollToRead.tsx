@@ -1,6 +1,10 @@
 "use client";
 import { motion } from "motion/react";
+import { useLanguage } from "@/lib/language-context";
+
 export default function ScrollToRead() {
+  const { t } = useLanguage();
+
   return (
     <>
       {/* Scroll Indicator */}
@@ -20,7 +24,7 @@ export default function ScrollToRead() {
               ?.scrollIntoView({ behavior: "smooth" })
           }
         >
-          <span className="font-medium text-[10px]">Scroll to explore</span>
+          <span className="font-medium text-[10px]">{t.common.scroll}</span>
           <div className="scrolldown-wrapper">
             <div className="scrolldown">
               <svg height="50" width="50">
