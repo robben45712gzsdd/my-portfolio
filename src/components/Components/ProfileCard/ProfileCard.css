@@ -34,7 +34,7 @@
   position: relative;
   touch-action: none;
   display: flex;
-  justify-content: end;
+  justify-content: center;
 }
 
 
@@ -51,7 +51,7 @@
 }
 
 .pc-card {
-  height: 80svh;
+  height: clamp(430px, 66svh, 620px);
   display: grid;
   aspect-ratio: 0.718;
   border-radius: var(--card-radius);
@@ -166,7 +166,7 @@
 }
 
 .pc-avatar-content {
-  mix-blend-mode: screen;
+  mix-blend-mode: normal !important;
   overflow: hidden;
 }
 
@@ -177,6 +177,8 @@
   transform: translateX(-50%) scale(1);
   bottom: 2px;
   opacity: calc(1.75 - var(--pointer-from-center));
+  filter: saturate(1.1) contrast(1.04);
+  mix-blend-mode: normal !important;
 }
 
 .pc-avatar-content::before {
@@ -280,6 +282,10 @@
   mix-blend-mode: luminosity;
 }
 
+.pc-avatar-content.pc-content {
+  mix-blend-mode: normal !important;
+}
+
 .pc-details {
   width: 100%;
   position: absolute;
@@ -337,7 +343,7 @@
 
 @media (max-width: 768px) {
   .pc-card {
-    height: 70svh;
+    height: clamp(380px, 62svh, 520px);
   }
 
   .pc-details {
@@ -384,7 +390,7 @@
 
 @media (max-width: 480px) {
   .pc-card {
-    height: 60svh;
+    height: clamp(340px, 58svh, 460px);
   }
 
   .pc-details {
@@ -434,7 +440,7 @@
 
 @media (max-width: 320px) {
   .pc-card {
-    height: 55svh;
+    height: 330px;
   }
 
   .pc-details h3 {

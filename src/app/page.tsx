@@ -8,6 +8,7 @@ import Services from "@/components/Services/Services";
 import Skills from "@/components/Skills/Skills";
 import Process from "@/components/Process/Process";
 import Timeline from "@/components/Timeline/Timeline";
+import ResumeSnapshot from "@/components/ResumeSnapshot/ResumeSnapshot";
 import ProjectShowcase from "@/components/ProjectShowcase/ProjectShowcase";
 import Contact from "@/components/Contact/Contact";
 import Footer from "@/components/Footer/Footer";
@@ -100,6 +101,7 @@ export default function Home() {
           <Skills />
           <Process />
           <Timeline />
+          <ResumeSnapshot />
           <ProjectShowcase />
 
           <div className="mx-auto min-h-screen w-full py-12">

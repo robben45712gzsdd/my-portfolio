@@ -15,6 +15,7 @@ export const profile = {
   email: "duongvanmanh2953@gmail.com",
   github: "https://github.com/robben45712gzsdd",
   facebook: "https://www.facebook.com/manhduong2953/",
+  resume: "/resume/Duong-Van-Manh-Frontend-Developer-CV.pdf",
 };
 
 export const content = {
@@ -26,13 +27,16 @@ export const content = {
       skills: "Kỹ năng",
       process: "Quy trình",
       journey: "Kinh nghiệm",
+      resume: "CV",
       contact: "Liên hệ",
     },
     common: {
-      available: "Sẵn sàng cho cơ hội mới",
+      available: "Sẵn sàng cho cơ hội Front-End mới",
       contactMe: "Liên hệ",
       viewWork: "Xem dự án",
       getInTouch: "Trao đổi ngay",
+      viewCv: "Xem CV",
+      downloadCv: "Tải CV PDF",
       scroll: "Cuộn để xem thêm",
       liveDemo: "Demo",
       code: "Mã nguồn",
@@ -43,7 +47,20 @@ export const content = {
       greeting: "Xin chào, tôi là Dương Văn Mạnh",
       roles: ["Front-End Developer", "Vue/Nuxt Developer", "React Developer"],
       description:
-        "Front-End Developer có 2 năm kinh nghiệm xây dựng web app tập trung vào người dùng với Vue/Nuxt, React, TypeScript, RESTful API và quy trình Agile/Scrum.",
+        "Front-End Developer có 2 năm kinh nghiệm xây dựng web app thực tế với Vue/Nuxt, React, TypeScript, RESTful API, UI responsive, tối ưu hiệu năng và quy trình Agile/Scrum.",
+    },
+    resume: {
+      title: "CV cho nhà tuyển dụng",
+      subtitle:
+        "Bản tóm tắt nhanh từ CV mới nhất: kinh nghiệm, thế mạnh và thông tin liên hệ cần thiết để đánh giá nhanh mức độ phù hợp.",
+      highlights: [
+        { label: "Kinh nghiệm", value: "2 năm Front-End" },
+        { label: "Thế mạnh", value: "Vue/Nuxt, React, TypeScript" },
+        { label: "Sản phẩm", value: "CPMS, CMS, 3D Viewer, Web app" },
+        { label: "Làm việc", value: "Agile/Scrum, Jira, Git, BA/QA/Backend" },
+      ],
+      note:
+        "CV PDF đã được đính kèm trực tiếp trên portfolio để nhà tuyển dụng có thể mở hoặc tải xuống ngay.",
     },
     about: {
       title: "Giới thiệu",
@@ -59,7 +76,7 @@ export const content = {
       techTitle: "Công nghệ & công cụ",
       workflowTitle: "Cách tôi làm việc",
       workflow:
-        "Tôi bắt đầu từ yêu cầu nghiệp vụ, chia nhỏ task trên Jira, ước lượng rõ ràng, xây dựng UI theo component có thể tái sử dụng, tích hợp RESTful API, review code, test luồng chính và tối ưu performance trước khi bàn giao. Với sản phẩm lớn, tôi ưu tiên lazy loading, pagination, virtual scrolling, debouncing/throttling, caching và SSR/SSG khi phù hợp.",
+        "Tôi bắt đầu từ yêu cầu nghiệp vụ, chia nhỏ task trên Jira, ước lượng rõ ràng, xây dựng UI theo component có thể tái sử dụng, tích hợp RESTful API, review code, test luồng chính và tối ưu performance trước khi bàn giao.",
       passionsTitle: "Tôi quan tâm nhiều đến",
       passions: ["Web app hiệu năng cao", "UI/UX dễ dùng", "Kiến trúc component", "Tối ưu SEO"],
     },
@@ -71,7 +88,7 @@ export const content = {
           title: "Front-End Web App",
           description:
             "Xây dựng giao diện responsive, dễ bảo trì với Vue/Nuxt, React, TypeScript, Tailwind CSS và SCSS.",
-          features: ["SPA, CSR, SSR, SSG", "Reusable components", "State management với Pinia/Vuex", "Responsive UI"],
+          features: ["SPA, CSR, SSR, SSG", "Reusable components", "Pinia/Vuex state management", "Responsive UI"],
         },
         {
           title: "API & Real-time Integration",
@@ -142,7 +159,7 @@ export const content = {
           year: "04/06/2024 - 06/02/2026",
           title: "Frontend Developer - NekSolution Co., Ltd.",
           desc:
-            "Xây dựng 3D Viewer bằng Nuxt 2, Three.js, Tailwind CSS, Ant Design Vue; phát triển CMS Streamie với Nuxt 3, TypeScript, Pinia; làm landing page SEO, animation GSAP/AOS và tích hợp Web3 bằng Ethers.js.",
+            "Tham gia nhiều dự án có lượng người dùng lớn: 3D Viewer bằng Nuxt 2, Three.js, Tailwind CSS, Ant Design Vue; Streamie CMS bằng Nuxt 3, TypeScript, Pinia cho quản trị nội dung, tài khoản, phân quyền và dữ liệu người dùng; landing page SEO có animation GSAP/AOS; tích hợp Web3 bằng Ethers.js. Tập trung tối ưu responsive UI, hiệu năng render, pagination/filter/search cho dữ liệu lớn, hỗ trợ deploy VPS và phối hợp Backend/QA xử lý bug production.",
         },
         {
           year: "2021 - 2025",
@@ -199,13 +216,16 @@ export const content = {
       skills: "Skills",
       process: "Process",
       journey: "Experience",
+      resume: "CV",
       contact: "Contact",
     },
     common: {
-      available: "Available for new opportunities",
+      available: "Available for new Front-End opportunities",
       contactMe: "Contact Me",
       viewWork: "View Projects",
       getInTouch: "Get In Touch",
+      viewCv: "View CV",
+      downloadCv: "Download CV PDF",
       scroll: "Scroll to explore",
       liveDemo: "Demo",
       code: "Code",
@@ -216,7 +236,20 @@ export const content = {
       greeting: "Hi, I'm Dương Văn Mạnh",
       roles: ["Front-End Developer", "Vue/Nuxt Developer", "React Developer"],
       description:
-        "Front-End Developer with 2 years of experience building user-focused web applications with Vue/Nuxt, React, TypeScript, RESTful APIs, and Agile/Scrum workflows.",
+        "Front-End Developer with 2 years of hands-on experience building production web apps with Vue/Nuxt, React, TypeScript, RESTful APIs, responsive UI, performance optimization, and Agile/Scrum workflows.",
+    },
+    resume: {
+      title: "CV for recruiters",
+      subtitle:
+        "A quick snapshot from my latest CV: experience, strengths, and contact details recruiters need for a fast fit check.",
+      highlights: [
+        { label: "Experience", value: "2 years Front-End" },
+        { label: "Strengths", value: "Vue/Nuxt, React, TypeScript" },
+        { label: "Products", value: "CPMS, CMS, 3D Viewer, Web apps" },
+        { label: "Workflow", value: "Agile/Scrum, Jira, Git, BA/QA/Backend" },
+      ],
+      note:
+        "The PDF CV is attached directly to this portfolio so recruiters can open or download it immediately.",
     },
     about: {
       title: "About Me",
@@ -232,7 +265,7 @@ export const content = {
       techTitle: "Tech & Tools",
       workflowTitle: "Workflow",
       workflow:
-        "I start from business requirements, break work into Jira tasks, estimate clearly, build reusable UI components, integrate RESTful APIs, review code, test core flows, and optimize performance before handoff. For larger products, I prioritize lazy loading, pagination, virtual scrolling, debouncing/throttling, caching, and SSR/SSG when it fits.",
+        "I start from business requirements, break work into Jira tasks, estimate clearly, build reusable UI components, integrate RESTful APIs, review code, test core flows, and optimize performance before handoff.",
       passionsTitle: "What I care about",
       passions: ["High-performance web apps", "Usable UI/UX", "Component architecture", "SEO optimization"],
     },
@@ -315,7 +348,7 @@ export const content = {
           year: "04/06/2024 - 06/02/2026",
           title: "Frontend Developer - NekSolution Co., Ltd.",
           desc:
-            "Built a Nuxt 2/Three.js 3D Viewer, Nuxt 3/TypeScript/Pinia CMS Streamie, SEO landing pages, GSAP/AOS animations, VPS deployment, and Web3 features with Ethers.js.",
+            "Worked across high-user production projects: a Nuxt 2/Three.js 3D Viewer, the Nuxt 3/TypeScript/Pinia Streamie CMS for content, account, permission, and user-data management, SEO landing pages with GSAP/AOS animation, and Web3 features with Ethers.js. Focused on responsive UI, render performance, pagination/filter/search for larger data sets, VPS deployment support, and production bug fixing with Backend/QA.",
         },
         {
           year: "2021 - 2025",
@@ -381,24 +414,25 @@ export const skillItems = [
   { name: "SQL Server", category: "Database" },
   { name: "MySQL", category: "Database" },
   { name: "Redis", category: "Database" },
-  { name: "Vuetify", category: "Libraries" },
-  { name: "Ant Design Vue", category: "Libraries" },
-  { name: "Socket.IO", category: "Libraries" },
-  { name: "PeerJS", category: "Libraries" },
-  { name: "Firebase", category: "Libraries" },
-  { name: "Cloudinary", category: "Libraries" },
-  { name: "GSAP", category: "Libraries" },
-  { name: "AOS", category: "Libraries" },
-  { name: "Docker", category: "DevOps" },
-  { name: "VPS", category: "DevOps" },
-  { name: "Linux", category: "DevOps" },
-  { name: "Git", category: "Workflow" },
-  { name: "Jira", category: "Workflow" },
-  { name: "Agile/Scrum", category: "Workflow" },
-  { name: "MCP Server", category: "AI Support" },
-  { name: "GitHub Copilot", category: "AI Support" },
-  { name: "Claude", category: "AI Support" },
-  { name: "ChatGPT Plus", category: "AI Support" },
+  { name: "Vuetify", category: "Libraries", description: "Vue UI library" },
+  { name: "Ant Design Vue", category: "Libraries", description: "Enterprise UI components" },
+  { name: "Socket.IO", category: "Libraries", description: "Realtime communication" },
+  { name: "PeerJS", category: "Libraries", description: "WebRTC peer connection" },
+  { name: "Firebase", category: "Libraries", description: "Auth, storage, realtime" },
+  { name: "Cloudinary", category: "Libraries", description: "Media upload/CDN" },
+  { name: "GSAP", category: "Libraries", description: "Web animation" },
+  { name: "AOS", category: "Libraries", description: "Scroll animation" },
+  { name: "Docker", category: "DevOps", description: "Container workflow" },
+  { name: "VPS", category: "DevOps", description: "Linux server deployment" },
+  { name: "Linux", category: "DevOps", description: "Server environment" },
+  { name: "Git", category: "Workflow", description: "Version control" },
+  { name: "Jira", category: "Workflow", description: "Sprint/task tracking" },
+  { name: "Agile/Scrum", category: "Workflow", description: "Team delivery process" },
+  { name: "MCP Server", category: "AI Support", description: "AI tool integration" },
+  { name: "Codex CLI", category: "AI Support", description: "AI coding in terminal" },
+  { name: "GitHub Copilot", category: "AI Support", description: "Code completion" },
+  { name: "Claude", category: "AI Support", description: "Code review/support" },
+  { name: "ChatGPT Plus", category: "AI Support", description: "Problem solving" },
 ];
 
 export const projectItems = [

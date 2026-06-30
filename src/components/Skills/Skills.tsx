@@ -28,18 +28,83 @@ const iconMap: Record<string, string> = {
   Jira: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg",
 };
 
+const fallbackStyleMap: Record<string, string> = {
+  Libraries: "#e879f9",
+  DevOps: "#34d399",
+  Workflow: "#fbbf24",
+  "AI Support": "#67e8f9",
+};
+
+const labelMap: Record<string, string> = {
+  "Ant Design Vue": "Ant",
+  "Socket.IO": "SIO",
+  PeerJS: "PJS",
+  Cloudinary: "CLD",
+  GSAP: "GSAP",
+  AOS: "AOS",
+  VPS: "VPS",
+  "Agile/Scrum": "AG",
+  "MCP Server": "MCP",
+  "Codex CLI": "CX",
+  "GitHub Copilot": "GHC",
+  Claude: "CL",
+  "ChatGPT Plus": "GPT",
+};
+
+function FallbackSkillIcon({
+  label,
+  color,
+}: {
+  label: string;
+  color: string;
+}) {
+  return (
+    <svg
+      className="h-10 w-10"
+      viewBox="0 0 48 48"
+      role="img"
+      aria-hidden="true"
+    >
+      <rect
+        x="4"
+        y="4"
+        width="40"
+        height="40"
+        rx="10"
+        fill="#0f172a"
+        stroke={color}
+        strokeOpacity="0.55"
+      />
+      <path
+        d="M14 16h20M14 32h20M16 14v20M32 14v20"
+        stroke={color}
+        strokeOpacity="0.22"
+        strokeWidth="1.5"
+      />
+      <circle cx="14" cy="16" r="2" fill={color} fillOpacity="0.7" />
+      <circle cx="34" cy="32" r="2" fill={color} fillOpacity="0.7" />
+      <text
+        x="24"
+        y="28"
+        textAnchor="middle"
+        className="fill-white text-[10px] font-bold"
+      >
+        {label}
+      </text>
+    </svg>
+  );
+}
+
 export default function Skills() {
   const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("All");
 
   const categoryMap = t.skills.categories;
-  const activeRawCategory =
-    activeCategory === categoryMap[0] ? "All" : activeCategory;
 
   const filteredSkills =
-    activeRawCategory === "All"
+    activeCategory === "All"
       ? skillItems
-      : skillItems.filter((skill) => skill.category === activeRawCategory);
+      : skillItems.filter((skill) => skill.category === activeCategory);
 
   return (
     <section id="skills" className="mx-auto w-full max-w-6xl py-20">
@@ -57,20 +122,24 @@ export default function Skills() {
       </div>
 
       <div className="mb-10 flex flex-wrap justify-center gap-2 px-4">
-        {categoryMap.map((category) => (
-          <button
-            key={category}
-            onClick={() => setActiveCategory(category)}
-            className={`rounded-full px-3 py-2 text-xs font-medium transition-colors sm:px-4 sm:text-sm ${
-              activeCategory === category
-                ? "border border-white/20 bg-white/10 text-white"
-                : "border border-transparent text-slate-400 hover:bg-white/5 hover:text-white"
-            }`}
-            type="button"
-          >
-            {category}
-          </button>
-        ))}
+        {categoryMap.map((category, index) => {
+          const rawCategory = index === 0 ? "All" : category;
+
+          return (
+            <button
+              key={category}
+              onClick={() => setActiveCategory(rawCategory)}
+              className={`rounded-full px-3 py-2 text-xs font-medium transition-colors sm:px-4 sm:text-sm ${
+                activeCategory === rawCategory
+                  ? "border border-white/20 bg-white/10 text-white"
+                  : "border border-transparent text-slate-400 hover:bg-white/5 hover:text-white"
+              }`}
+              type="button"
+            >
+              {category}
+            </button>
+          );
+        })}
       </div>
 
       <motion.div
@@ -96,14 +165,17 @@ export default function Skills() {
                   className="h-8 w-8 object-contain"
                 />
               ) : (
-                <span className="text-sm font-bold text-slate-900">
-                  {skill.name.slice(0, 2)}
-                </span>
+                <FallbackSkillIcon
+                  label={labelMap[skill.name] ?? skill.name.slice(0, 2)}
+                  color={fallbackStyleMap[skill.category] ?? "#94a3b8"}
+                />
               )}
             </div>
             <div>
               <h3 className="font-semibold text-white">{skill.name}</h3>
-              <p className="mt-1 text-sm text-slate-400">{skill.category}</p>
+              <p className="mt-1 text-sm text-slate-400">
+                {"description" in skill ? skill.description : skill.category}
+              </p>
             </div>
           </motion.div>
         ))}

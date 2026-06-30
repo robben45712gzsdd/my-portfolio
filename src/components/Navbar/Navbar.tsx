@@ -15,6 +15,7 @@ export default function Navbar() {
     { href: "#skills", label: t.nav.skills },
     { href: "#process", label: t.nav.process },
     { href: "#timeline", label: t.nav.journey },
+    { href: "#resume", label: t.nav.resume },
     { href: "#projects", label: t.nav.projects },
     { href: "#contact", label: t.nav.contact },
   ];
@@ -41,8 +42,35 @@ export default function Navbar() {
 
   return (
     <nav className="fixed left-0 right-0 top-0 z-30 px-4 py-4">
-      <div className="relative z-10 mx-auto flex max-w-6xl items-start justify-end md:justify-center gap-3">
-        <div className="flex w-full max-w-fit items-center justify-between rounded-2xl border border-white/15 bg-black/85 px-4 py-3 shadow-lg shadow-black/20 backdrop-blur md:px-6">
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-3 md:grid-cols-[1fr_auto_1fr]">
+        <div className="col-start-2 justify-self-end md:hidden">
+          <div className="flex w-full max-w-fit items-center justify-between rounded-2xl border border-white/15 bg-black/85 px-4 py-3 shadow-lg shadow-black/20 backdrop-blur">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="relative flex h-9 w-9 flex-col items-center justify-center rounded-lg bg-white/10 transition-colors hover:bg-white/20"
+              aria-label="Toggle mobile menu"
+              type="button"
+            >
+              <span
+                className={`h-0.5 w-5 bg-white transition-transform duration-200 ${
+                  isOpen ? "translate-y-0 rotate-45" : "-translate-y-1.5"
+                }`}
+              />
+              <span
+                className={`h-0.5 w-5 bg-white transition-opacity duration-200 ${
+                  isOpen ? "opacity-0" : "opacity-100"
+                }`}
+              />
+              <span
+                className={`h-0.5 w-5 bg-white transition-transform duration-200 ${
+                  isOpen ? "-translate-y-0.5 -rotate-45" : "translate-y-1.5"
+                }`}
+              />
+            </button>
+          </div>
+        </div>
+
+        <div className="hidden items-center justify-center justify-self-center rounded-2xl border border-white/15 bg-black/85 px-5 py-3 shadow-lg shadow-black/20 backdrop-blur md:col-start-2 md:flex">
           <div className="hidden items-center gap-5 md:flex">
             {navLinks.map((link) => (
               <a
@@ -55,32 +83,9 @@ export default function Navbar() {
               </a>
             ))}
           </div>
-
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="relative flex h-9 w-9 flex-col items-center justify-center rounded-lg bg-white/10 transition-colors hover:bg-white/20 md:hidden"
-            aria-label="Toggle mobile menu"
-            type="button"
-          >
-            <span
-              className={`h-0.5 w-5 bg-white transition-transform duration-200 ${
-                isOpen ? "translate-y-0 rotate-45" : "-translate-y-1.5"
-              }`}
-            />
-            <span
-              className={`h-0.5 w-5 bg-white transition-opacity duration-200 ${
-                isOpen ? "opacity-0" : "opacity-100"
-              }`}
-            />
-            <span
-              className={`h-0.5 w-5 bg-white transition-transform duration-200 ${
-                isOpen ? "-translate-y-0.5 -rotate-45" : "translate-y-1.5"
-              }`}
-            />
-          </button>
         </div>
 
-        <div className="hidden md:block">{languageToggle}</div>
+        <div className="hidden justify-self-start md:col-start-3 md:block">{languageToggle}</div>
 
         {isOpen && (
           <div className="fixed inset-0 z-50 md:hidden">

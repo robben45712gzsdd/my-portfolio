@@ -62,13 +62,21 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.4 }}
-          className="mb-8 flex md:flex-row flex-col items-stretch gap-4 sm:items-center w-full"
+          className="mb-8 flex w-full flex-col items-stretch gap-4 sm:items-center md:flex-row"
         >
           <a
             href="#projects"
             className="rounded-xl flex-1 bg-cyan-400 px-6 py-3 text-center font-semibold text-slate-950 transition-colors hover:bg-cyan-300"
           >
             {t.common.viewWork}
+          </a>
+          <a
+            href={profile.resume}
+            target="_blank"
+            rel="noreferrer"
+            className="flex-1 rounded-xl border border-cyan-200/40 bg-cyan-300/10 px-6 py-3 text-center font-semibold text-cyan-100 transition-colors hover:bg-cyan-300/20"
+          >
+            {t.common.viewCv}
           </a>
           <a
             href="#contact"
