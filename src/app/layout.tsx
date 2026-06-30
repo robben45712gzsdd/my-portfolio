@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/lib/language-context";
+import SmoothScroll from "@/components/SmoothScroll/SmoothScroll";
 
 export const metadata: Metadata = {
   title: "Duong Van Manh - Front-End Developer",
@@ -42,7 +44,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <LanguageProvider>{children}</LanguageProvider>
+          <LanguageProvider>
+            <SmoothScroll>{children}</SmoothScroll>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
